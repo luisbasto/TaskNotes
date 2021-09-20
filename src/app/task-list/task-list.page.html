@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title> Task List Note</ion-title>
+    <ion-button (click)="addItem()" slot="end"> ADD ITEM
+      <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let task of tasks">
+      <ion-item-options side="start" (ionSwipe)="remTaskNote(task, slidingItem)"> 
+        <ion-buttons>
+          <ion-button (click)="markAsFinished(task , slidingItem)" color="success">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="remTaskNote(task , slidingItem)" color="danger">
+            <ion-icon name="close-outline"></ion-icon> 
+          </ion-button>
+        </ion-buttons>
+        <!--<ion-item-option (click)="markAsFinished(task)">Unread</ion-item-option>-->
+      </ion-item-options>
+      <ion-item [ngClass]="{taskFinished: task.status == 'finished'}">
+        {{task.title}}-{{task.status}} 
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
